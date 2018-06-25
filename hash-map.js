@@ -34,13 +34,15 @@ class HashMap {
     }
 
     const index = this._findSlot(key);
+    if(!index._deleted){
+      this.length++;
+    }
 
     this._slots[index] = {
       key,
       value,
       deleted: false
     };
-    this.length++;
   }
 
   remove(key) {
