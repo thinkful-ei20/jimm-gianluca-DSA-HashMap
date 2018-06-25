@@ -127,7 +127,7 @@ function checkPalindrome(str){
 
 const groupAnagrams = (words) => {
 
-	/**
+  /**
 	 * for each word in words
 	 * 	sort the characters
 	 * 	hash to index in hashmap and push word to the array
@@ -137,51 +137,51 @@ const groupAnagrams = (words) => {
 	 *
 	 */
 
-	const toReturn = [];
-	const uniques = [];
-	const anagrams = new HashMap();
+  const toReturn = [];
+  const uniques = [];
+  const anagrams = new HashMap();
 
-	for(let word of words) {
-		let sorted = word.split('').sort().join('');
-		let val;
+  for(let word of words) {
+    let sorted = word.split('').sort().join('');
+    let val;
 
-		try{
-			val = anagrams.get(sorted);
-			val.push(word);
-			anagrams.remove(sorted);
-			anagrams.set(sorted, val);
-		}
-		catch(err) {
-			uniques.push(sorted);
-			anagrams.set(sorted, [word]);
-		}
-	}
+    try{
+      val = anagrams.get(sorted);
+      val.push(word);
+      anagrams.remove(sorted);
+      anagrams.set(sorted, val);
+    }
+    catch(err) {
+      uniques.push(sorted);
+      anagrams.set(sorted, [word]);
+    }
+  }
 
-	for(let unique of uniques) {
-		toReturn.push(anagrams.get(unique));
-	}
+  for(let unique of uniques) {
+    toReturn.push(anagrams.get(unique));
+  }
 
-	return toReturn;
+  return toReturn;
 };
 
 
 function main() {
   // 1) Create a HashMap
-  // const lor = new HashMap();
-  // lor.set('Hobbit','Bilbo');
-  // console.log(lor);
-  // lor.set('Hobbit','Frodo');
-  // console.log(lor);
-  // lor.set('Wizard','Gandolf');
-  // lor.set('Human','Aragon');
-  // lor.set('Elf','Legolas');
-  // lor.set('Maiar','The Necromancer');
-  // lor.set('Maiar','Sauron');
-  // lor.set('RingBearer','Golum');
-  // lor.set('LadyOfLight', 'Galadriel');
-  // lor.set('HalfElven', 'Arwen');
-  // lor.set('Ent', 'Treebeard');
-  // console.log(lor);
+  const lor = new HashMap();
+  lor.set('Hobbit','Bilbo');
+  console.log(lor);
+  lor.set('Hobbit','Frodo');
+  console.log(lor);
+  lor.set('Wizard','Gandolf');
+  lor.set('Human','Aragon');
+  lor.set('Elf','Legolas');
+  lor.set('Maiar','The Necromancer');
+  lor.set('Maiar','Sauron');
+  lor.set('RingBearer','Golum');
+  lor.set('LadyOfLight', 'Galadriel');
+  lor.set('HalfElven', 'Arwen');
+  lor.set('Ent', 'Treebeard');
+  console.log(lor);
   // console.log(lor.get('Maiar'));
 
   // 2) Palindromes
@@ -192,9 +192,8 @@ function main() {
   // console.log(checkPalindrome('aaa')); // true
 
   // 2) Group Anagaramgs
-
-  const words = ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race','scoop']
-  console.log(groupAnagrams(words));
+  // const words = ['east', 'cars', 'acre', 'arcs', 'teas', 'eats', 'race','scoop']
+  // console.log(groupAnagrams(words));
 
 }
 
