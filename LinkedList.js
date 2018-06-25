@@ -44,7 +44,7 @@ class LinkedList {
 			cNode = cNode.next;
 		}
 		if (cNode === null) {
-			console.log('Before ttem not found. Could not insert.');
+			console.log('Before item not found. Could not insert.');
 			return;
 		}
 		pNode.next = new _Node(item, cNode);

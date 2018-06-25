@@ -35,15 +35,14 @@ class HashMap {
 		const index = this._findSlot(key);
 		if(this._slots[index] === undefined){
 			this._slots[index] = new LinkedList();
-			this._slots[index].insertFirst({key, value, deleted: false});
+			this._slots[index].insertFirst({key, value});
 			this.length++;
 		} else {
 			if(this._slots[index].find(key)){
 				this._slots[index].remove(key);
 			}
-			this._slots[index].insertLast({key, value, deleted: false});
+			this._slots[index].insertLast({key, value});
 		}
-
 	}
 
 	remove(key) {
@@ -52,12 +51,13 @@ class HashMap {
 		if(slot === undefined) {
 			throw new Error('Key error');
 		}
-
-		slot.remove(key)
-
-		slot.deleted = true;
-		this.length--;
-		this._deleted++;
+		// remove from linked-list
+		slot.remove(key);
+		if(slot.head === null) {
+			console.log('I ran!');
+			this.length--;
+			this._deleted++;
+		}
 	}
 
 	_findSlot(key) {
@@ -84,7 +84,7 @@ class HashMap {
 		for(const slot of oldSlots) {
 			if(slot !== undefined) {
 				let current = slot.head;
-				while(current !== null && (current.value.deleted === false)) {
+				while(current !== null) {
 					this.set(current.value.key, current.value.value);
 					current = current.next;
 				}
@@ -93,30 +93,30 @@ class HashMap {
 	}
 }
 
-HashMap.MAX_LOAD_RATIO = 0.6;
+HashMap.MAX_LOAD_RATIO = 0.9;
 HashMap.SIZE_RATIO = 3;
 
 function main() {
-	const lor = new HashMap();
-	lor.set('Hobbit','Bilbo');
+	// const lor = new HashMap();
+	// lor.set('Hobbit','Bilbo');
 	//console.log(lor.get('Hobbit'));
 
-	lor.set('Hobbit','Frodo');
-	//console.log(lor.get('Hobbit'));
+	// lor.set('Hobbit','Frodo');
+	// console.log(lor.get('Hobbit'));
 
-	lor.set('Wizard','Gandolf');
-	lor.set('Human','Aragon');
-	lor.set('Elf','Legolas');
+	// lor.set('Wizard','Gandolf');
+	// lor.set('Human','Aragon');
+	// lor.set('Elf','Legolas');
 
-	console.log(JSON.stringify(lor, null, 2));
+	// console.log(JSON.stringify(lor, null, 2));
 
 	// remains in the hash map until next resize
 	// lor.remove('Hobbit');
 
-	lor.set('Maiar','The Necromancer');
-	lor.set('Maiar','Sauron');
-	lor.set('RingBearer','Golum');
-	lor.set('LadyOfLight', 'Galadriel');
+	// lor.set('Maiar','The Necromancer');
+	// lor.set('Maiar','Sauron');
+	// lor.set('RingBearer','Golum');
+	// lor.set('LadyOfLight', 'Galadriel');
 	// lor.set('HalfElven', 'Arwen');
 	// lor.set('Ent', 'Treebeard');
 
@@ -125,7 +125,16 @@ function main() {
 	// } catch(err){
 	//   console.log('`lor.get(`Hobbit`)` threw an error, must not exist');
 	// }
-	console.log(JSON.stringify(lor, null, 2));
+	// console.log(JSON.stringify(lor, null, 2));
+
+	// lor.remove('Wizard');
+	// lor.remove('Human');
+	// lor.remove('RingBearer');
+
+	// console.log(JSON.stringify(lor, null, 2));
+
+	// console.log(lor.get('Maiar'));
+	// console.log(lor.get('Wizard'));
 }
 
 main();
